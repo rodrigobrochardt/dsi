@@ -48,8 +48,6 @@ class _DSIPageState extends State<DSIPage> {
   }
 
   String _getImageName() {
-    //abra o arquivo 'pubspec.yaml' e veja as entradas na seção 'assets'.
-    //para incluir novas imagens, basta incluir novas entradas nesta seção.
     String result;
     if (widget.clicks == 0) {
       result = '';
@@ -110,13 +108,12 @@ class _DSIPageState extends State<DSIPage> {
           ),
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
         backgroundColor: Colors.grey[700],
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
