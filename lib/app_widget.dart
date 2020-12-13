@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dsi_page.dart';
 import 'home_page.dart';
+import 'login_page.dart';
 
 class DSIApp extends StatelessWidget {
   @override
@@ -14,8 +15,10 @@ class DSIApp extends StatelessWidget {
       ),
       initialRoute: 'Home',
       routes: {
+        //tags para trocar de tela
         'Home': (context) => HomePage(),
         'DSI': (context) => DSIPage(),
+        'Login': (context) => LoginPage(),
       },
     );
   }
