@@ -13,7 +13,7 @@ class DSIApp extends StatelessWidget {
         primaryColor: Colors.grey[700],
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: 'Home',
+      initialRoute: 'Login',
       routes: {
         //tags para trocar de tela
         'Home': (context) => HomePage(),
