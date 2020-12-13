@@ -1,3 +1,4 @@
+import 'package:dsi_app/register_page.dart';
 import 'package:flutter/material.dart';
 
 import 'dsi_page.dart';
@@ -19,6 +20,7 @@ class DSIApp extends StatelessWidget {
         'Home': (context) => HomePage(),
         'DSI': (context) => DSIPage(),
         'Login': (context) => LoginPage(),
+        'Register': (context) => RegisterPage(),
       },
     );
   }

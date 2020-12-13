@@ -127,7 +127,9 @@ class _LoginPageState extends State<LoginPage> {
                   width: 150,
                   height: 40,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('Register');
+                    },
                     child: Text(
                       'Cadastrar-se',
                       style: TextStyle(color: Colors.white),
