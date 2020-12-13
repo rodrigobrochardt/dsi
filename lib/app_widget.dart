@@ -1,6 +1,7 @@
 import 'package:dsi_app/register_page.dart';
 import 'package:flutter/material.dart';
 
+import 'forgot_page.dart';
 import 'dsi_page.dart';
 import 'home_page.dart';
 import 'login_page.dart';
@@ -17,6 +18,7 @@ class DSIApp extends StatelessWidget {
       initialRoute: 'Login',
       routes: {
         //tags para trocar de tela
+        'Forgot': (context) => ForgotPage(),
         'Home': (context) => HomePage(),
         'DSI': (context) => DSIPage(),
         'Login': (context) => LoginPage(),
@@ -25,3 +27,5 @@ class DSIApp extends StatelessWidget {
     );
   }
 }
+
+class ForgotPasswordPage {}

@@ -125,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               _senha == _confirmSenha) {
                             // condição que precisa deixar os espaços preenchidos e senhas iguais
                             isValidRegister(true);
-                            Navigator.popAndPushNamed(context, 'Login');
+                            Navigator.pop(context, 'Login');
                           } else {
                             isValidRegister(false);
                           }

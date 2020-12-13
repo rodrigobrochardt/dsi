@@ -89,8 +89,9 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     FlatButton(
-                      onPressed: () {},
-                      //color: Colors.black.withOpacity(0.05),
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'Forgot');
+                      },
                       child: Text(
                         'Esqueci minha senha',
                         style: TextStyle(color: Colors.grey[700]),
@@ -106,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       if (_login != '' && _senha != '') {
                         isValidLogin(true);
-                        Navigator.of(context).pushReplacementNamed('Home');
+                        Navigator.pushReplacementNamed(context, 'Home');
                       } else {
                         isValidLogin(false);
                       }
@@ -128,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 40,
                   child: RaisedButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed('Register');
+                      Navigator.pushNamed(context, 'Register');
                     },
                     child: Text(
                       'Cadastrar-se',
