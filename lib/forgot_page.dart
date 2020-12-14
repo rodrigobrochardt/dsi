@@ -75,7 +75,7 @@ class _ForgotPageState extends State<ForgotPage> {
                     }
                   },
                   child: Text(
-                    'Cadastrar-se',
+                    'Recuperar',
                     style: TextStyle(color: Colors.white),
                   ),
                   color: Colors.grey[700],
