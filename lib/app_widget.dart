@@ -1,4 +1,5 @@
-import 'package:dsi_app/register_page.dart';
+import 'package:add_to_app/personalData_page.dart';
+import 'package:add_to_app/register_page.dart';
 import 'package:flutter/material.dart';
 
 import 'forgot_page.dart';
@@ -23,6 +24,7 @@ class DSIApp extends StatelessWidget {
         'DSI': (context) => DSIPage(),
         'Login': (context) => LoginPage(),
         'Register': (context) => RegisterPage(),
+        'PersonalData': (context) => PersonalDataPage(),
       },
     );
   }

@@ -51,7 +51,7 @@ class _ForgotPageState extends State<ForgotPage> {
                 onChanged: (text) {
                   _email = text;
                 },
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   labelText: 'Email:',
                   labelStyle: TextStyle(fontSize: 15),
