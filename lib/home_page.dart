@@ -30,7 +30,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Home'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('Home'),
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Navigator.pushNamed(context, "PersonalData");
+              },
+            ),
+          ],
+        ),
       ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,

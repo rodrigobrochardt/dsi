@@ -1,4 +1,4 @@
-import 'package:dsi_app/main.dart';
+import 'package:add_to_app/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
