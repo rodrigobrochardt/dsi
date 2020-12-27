@@ -30,4 +30,42 @@ class DSIApp extends StatelessWidget {
   }
 }
 
+Widget menu_bar(context) {
+  //barra de menu
+  return (Drawer(
+    child: Column(
+      children: [
+        UserAccountsDrawerHeader(
+          accountName: Text("User"),
+        ),
+        ListTile(
+          leading: Icon(Icons.account_circle),
+          title: Text('Pessoas'),
+          subtitle: Text("Informações"),
+          onTap: () {},
+        ),
+        ListTile(
+          leading: Icon(Icons.book),
+          title: Text('Alunos'),
+          subtitle: Text("Informações"),
+          onTap: () {},
+        ),
+        ListTile(
+          leading: Icon(Icons.school),
+          title: Text('Professores'),
+          subtitle: Text("Informações"),
+          onTap: () {},
+        ),
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text('Logout'),
+          onTap: () {
+            Navigator.of(context).pushReplacementNamed('Login');
+          },
+        ),
+      ],
+    ),
+  ));
+}
+
 class ForgotPasswordPage {}

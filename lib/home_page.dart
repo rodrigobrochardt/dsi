@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'app_widget.dart';
 import 'dsi_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,8 +29,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: menu_bar(context),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
