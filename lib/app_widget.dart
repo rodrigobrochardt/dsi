@@ -34,6 +34,45 @@ class DSIApp extends StatelessWidget {
   }
 }
 
+Widget isAlertDialogIncorrectFields(BuildContext context, text) {
+  //AlertDialog para alertar informação incorreta
+  showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return Wrap(
+          direction: Axis.vertical,
+          children: [
+            AlertDialog(
+              titlePadding:
+                  EdgeInsets.only(top: 40, bottom: 20, left: 30, right: 10),
+              actionsPadding: EdgeInsets.only(right: 60, bottom: 10, top: 20),
+              actions: [
+                SizedBox(
+                  width: 150,
+                  height: 40,
+                  child: RaisedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    color: Colors.grey[700],
+                    child: Text(
+                      "Ok",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )
+              ],
+              title: Text(
+                text,
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+          ],
+        );
+      });
+}
+
 Widget menu_bar(context) {
   //barra de menu
   return (Drawer(
@@ -83,5 +122,3 @@ Widget menu_bar(context) {
     ),
   ));
 }
-
-class ForgotPasswordPage {}

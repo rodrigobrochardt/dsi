@@ -1,3 +1,4 @@
+import 'package:add_to_app/app_widget.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -11,22 +12,6 @@ class _RegisterPageState extends State<RegisterPage> {
   String _login = '';
   String _senha = '';
   String _confirmSenha = '';
-  String msg = '';
-  Color validcolor = Colors.grey[700];
-
-  void isValidRegister(validing) {
-    if (validing) {
-      msg = 'Cadastro concluído!';
-      validcolor = Colors.green;
-    } else {
-      msg = 'Campo(s) inválido(s)!';
-      validcolor = Colors.red;
-    }
-    setState(() {
-      msg = msg;
-      validcolor = validcolor;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +28,8 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    msg,
-                    style: TextStyle(color: validcolor),
-                  ),
                   SizedBox(
-                    height: 1,
+                    height: 10,
                   ),
                   TextFormField(
                     onChanged: (text) {
@@ -124,10 +105,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               _confirmSenha != '' &&
                               _senha == _confirmSenha) {
                             // condição que precisa deixar os espaços preenchidos e senhas iguais
-                            isValidRegister(true);
                             Navigator.pop(context, 'Login');
                           } else {
-                            isValidRegister(false);
+                            isAlertDialogIncorrectFields(
+                                context, 'Campo(s) inválido(s)!');
                           }
                         },
                         color: Colors.grey[700],

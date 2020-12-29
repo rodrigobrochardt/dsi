@@ -1,4 +1,5 @@
 import 'package:add_to_app/alunos_list_page.dart';
+import 'package:add_to_app/app_widget.dart';
 import 'package:flutter/material.dart';
 
 class Aluno {
@@ -34,22 +35,6 @@ class AlunosInfo extends StatefulWidget {
 }
 
 class _AlunosInfoState extends State<AlunosInfo> {
-  String msg = '';
-  Color validcolor = Colors.grey[700];
-  void isValidInfo(validing) {
-    if (validing) {
-      msg = 'Cadastro concluído!';
-      validcolor = Colors.green;
-    } else {
-      msg = 'Campo(s) inválido(s)!';
-      validcolor = Colors.red;
-    }
-    setState(() {
-      msg = msg;
-      validcolor = validcolor;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,12 +50,8 @@ class _AlunosInfoState extends State<AlunosInfo> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    msg,
-                    style: TextStyle(color: validcolor),
-                  ),
                   SizedBox(
-                    height: 1,
+                    height: 10,
                   ),
                   TextFormField(
                     initialValue: widget.nome,
@@ -147,7 +128,6 @@ class _AlunosInfoState extends State<AlunosInfo> {
                               widget.endereco != '' &&
                               widget.matricula != '') {
                             // condição que precisa deixar os espaços preenchidos e senhas iguais
-                            isValidInfo(true);
                             Navigator.pop(context, [
                               widget.nome,
                               widget.cpf,
@@ -155,7 +135,8 @@ class _AlunosInfoState extends State<AlunosInfo> {
                               widget.matricula
                             ]);
                           } else {
-                            isValidInfo(false);
+                            isAlertDialogIncorrectFields(
+                                context, 'Campo(s) inválido(s)!');
                           }
                         },
                         color: Colors.grey[700],

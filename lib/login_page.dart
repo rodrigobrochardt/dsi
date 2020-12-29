@@ -1,6 +1,9 @@
 import 'package:add_to_app/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
+
+import 'app_widget.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -11,21 +14,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String _login = '';
   String _senha = '';
-  String msg = '';
-  Color validcolor = Colors.grey[700];
-  void isValidLogin(valid) {
-    if (valid) {
-      msg = 'Login válido!';
-      validcolor = Colors.green;
-    } else {
-      msg = 'Login/Senha inválido!';
-      validcolor = Colors.red;
-    }
-    setState(() {
-      msg = msg;
-      validcolor = validcolor;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +36,6 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   //espaçamento entre widgets
                   height: 40,
-                ),
-                Text(
-                  msg,
-                  style: TextStyle(color: validcolor),
                 ),
                 SizedBox(
                   height: 1,
@@ -106,10 +90,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: RaisedButton(
                     onPressed: () {
                       if (_login != '' && _senha != '') {
-                        isValidLogin(true);
                         Navigator.pushReplacementNamed(context, 'Home');
                       } else {
-                        isValidLogin(false);
+                        isAlertDialogIncorrectFields(
+                            context, "Login/Senha inválido(s)");
                       }
                     },
                     child: Text(

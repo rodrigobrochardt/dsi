@@ -1,3 +1,4 @@
+import 'package:add_to_app/app_widget.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPage extends StatefulWidget {
@@ -8,22 +9,6 @@ class ForgotPage extends StatefulWidget {
 
 class _ForgotPageState extends State<ForgotPage> {
   String _email = '';
-  String msg = '';
-  Color validcolor = Colors.grey[700];
-
-  void isValidForgot(valid) {
-    if (valid) {
-      msg = 'Senha Enviada por Email!';
-      validcolor = Colors.green;
-    } else {
-      msg = 'Email inválido!';
-      validcolor = Colors.red;
-    }
-    setState(() {
-      msg = msg;
-      validcolor = validcolor;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +25,8 @@ class _ForgotPageState extends State<ForgotPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                msg,
-                style: TextStyle(color: validcolor),
-              ),
               SizedBox(
-                height: 1,
+                height: 10,
               ),
               TextFormField(
                 onChanged: (text) {
@@ -68,10 +49,9 @@ class _ForgotPageState extends State<ForgotPage> {
                 child: RaisedButton(
                   onPressed: () {
                     if (_email != '') {
-                      isValidForgot(true);
                       Navigator.pop(context, 'Login');
                     } else {
-                      isValidForgot(false);
+                      isAlertDialogIncorrectFields(context, 'Email inválido!');
                     }
                   },
                   child: Text(

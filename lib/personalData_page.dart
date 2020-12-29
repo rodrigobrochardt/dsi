@@ -1,3 +1,4 @@
+import 'package:add_to_app/app_widget.dart';
 import 'package:flutter/material.dart';
 
 class PersonalDataPage extends StatefulWidget {
@@ -13,28 +14,12 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
   String _endereco = '';
   String _sexo;
   String _nacionalidade = '';
-  String msg = '';
-  Color validcolor = Colors.grey[700];
-
-  void isValidData(validing) {
-    if (validing) {
-      msg = 'Dados atualizados!';
-      validcolor = Colors.green;
-    } else {
-      msg = 'Campo(s) inválido(s)!';
-      validcolor = Colors.red;
-    }
-    setState(() {
-      msg = msg;
-      validcolor = validcolor;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Dados pessoais'),
+          title: Text('Dados da conta'),
         ),
         body: SingleChildScrollView(
           child: SizedBox(
@@ -45,12 +30,8 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    msg,
-                    style: TextStyle(color: validcolor),
-                  ),
                   SizedBox(
-                    height: 1,
+                    height: 10,
                   ),
                   TextFormField(
                     onChanged: (text) {
@@ -167,10 +148,10 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
                               _cpf != "" &&
                               _endereco != "" &&
                               _nacionalidade != "") {
-                            isValidData(true);
                             Navigator.pop(context, 'Home');
                           } else {
-                            isValidData(false);
+                            isAlertDialogIncorrectFields(
+                                context, 'Campo(s) inválido(s)!');
                           }
                         },
                         color: Colors.grey[700],
