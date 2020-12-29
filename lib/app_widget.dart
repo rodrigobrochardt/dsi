@@ -46,22 +46,16 @@ Widget isAlertDialogIncorrectFields(BuildContext context, text) {
             AlertDialog(
               titlePadding:
                   EdgeInsets.only(top: 40, bottom: 20, left: 30, right: 10),
-              actionsPadding: EdgeInsets.only(right: 60, bottom: 10, top: 20),
               actions: [
-                SizedBox(
-                  width: 150,
-                  height: 40,
-                  child: RaisedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    color: Colors.grey[700],
-                    child: Text(
-                      "Ok",
-                      style: TextStyle(color: Colors.white),
-                    ),
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'OK',
+                    style: TextStyle(color: Colors.grey[700]),
                   ),
-                )
+                ),
               ],
               title: Text(
                 text,
