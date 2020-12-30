@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.pushReplacementNamed(context, 'Home');
                       } else {
                         isAlertDialogIncorrectFields(
-                            context, "Login/Senha inválido(s)");
+                            context, "Login/Senha inválido(s)", Colors.red);
                       }
                     },
                     child: Text(

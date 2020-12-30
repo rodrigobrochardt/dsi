@@ -151,7 +151,7 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
                             Navigator.pop(context, 'Home');
                           } else {
                             isAlertDialogIncorrectFields(
-                                context, 'Campo(s) inválido(s)!');
+                                context, 'Campo(s) inválido(s)!', Colors.red);
                           }
                         },
                         color: Colors.grey[700],

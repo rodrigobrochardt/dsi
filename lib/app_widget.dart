@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:add_to_app/alunos_info_page.dart';
 import 'package:add_to_app/alunos_list_page.dart';
 import 'package:add_to_app/personalData_page.dart';
+import 'package:add_to_app/pessoas_list_page.dart';
 import 'package:add_to_app/professor_info_page.dart';
 import 'package:add_to_app/professor_list_page.dart';
 import 'package:add_to_app/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'forgot_page.dart';
 import 'dsi_page.dart';
@@ -33,13 +37,15 @@ class DSIApp extends StatelessWidget {
         'AlunosInfo': (context) => AlunosInfo(),
         'ProfessoresList': (context) => ProfessoresListPage(),
         'ProfessoresInfo': (context) => ProfessoresInfo(),
+        'PessoasList': (context) => PessoasListPage(),
       },
     );
   }
 }
 
-Widget isAlertDialogIncorrectFields(BuildContext context, text) {
+Widget isAlertDialogIncorrectFields(BuildContext context, text, Color color) {
   //AlertDialog para alertar informação incorreta
+
   showDialog(
       barrierDismissible: false,
       context: context,
@@ -63,7 +69,7 @@ Widget isAlertDialogIncorrectFields(BuildContext context, text) {
               ],
               title: Text(
                 text,
-                style: TextStyle(color: Colors.red),
+                style: TextStyle(color: color),
               ),
             ),
           ],
@@ -92,7 +98,9 @@ Widget menu_bar(context) {
             leading: Icon(Icons.account_circle),
             title: Text('Pessoas'),
             subtitle: Text("Informações"),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed("PessoasList");
+            },
           ),
           ListTile(
             leading: Icon(Icons.book),

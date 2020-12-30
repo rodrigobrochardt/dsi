@@ -1,13 +1,11 @@
 import 'package:add_to_app/app_widget.dart';
+import 'package:add_to_app/pessoas_list_page.dart';
 import 'package:flutter/material.dart';
 
-class Professor {
+class Professor extends Pessoa {
   //atributos  de professor
-  String nome;
-  String matricula;
-  String cpf;
-  String endereco;
-  Professor({this.nome, this.matricula, this.cpf, this.endereco});
+  Professor({String nome, String matricula, String cpf, String endereco})
+      : super(nome: nome, matricula: matricula, cpf: cpf, endereco: endereco);
   Professor.fromJson(Map<String, dynamic> json) {
     nome = json['nome'];
     matricula = json['matricula'];
@@ -136,7 +134,7 @@ class _ProfessoresInfo extends State<ProfessoresInfo> {
                             ]);
                           } else {
                             isAlertDialogIncorrectFields(
-                                context, 'Campo(s) inválido(s)!');
+                                context, 'Campo(s) inválido(s)!', Colors.red);
                           }
                         },
                         color: Colors.grey[700],

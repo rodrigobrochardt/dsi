@@ -108,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             Navigator.pop(context, 'Login');
                           } else {
                             isAlertDialogIncorrectFields(
-                                context, 'Campo(s) inválido(s)!');
+                                context, 'Campo(s) inválido(s)!', Colors.red);
                           }
                         },
                         color: Colors.grey[700],

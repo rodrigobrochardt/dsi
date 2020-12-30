@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class ProfessoresListPage extends StatefulWidget {
   var professores = new List<Professor>(); //instancia o objeto professor
+  Future loadProfessor;
 
   ProfessoresListPage() {
     professores = [];

@@ -51,7 +51,8 @@ class _ForgotPageState extends State<ForgotPage> {
                     if (_email != '') {
                       Navigator.pop(context, 'Login');
                     } else {
-                      isAlertDialogIncorrectFields(context, 'Email inválido!');
+                      isAlertDialogIncorrectFields(
+                          context, 'Email inválido!', Colors.red);
                     }
                   },
                   child: Text(

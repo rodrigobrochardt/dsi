@@ -1,19 +1,19 @@
+import 'package:add_to_app/alunos_list_page.dart';
 import 'package:add_to_app/app_widget.dart';
+import 'package:add_to_app/pessoas_list_page.dart';
 import 'package:flutter/material.dart';
 
-class Aluno {
+class Aluno extends Pessoa {
   //atributos  de aluno
-  String nome;
-  String matricula;
-  String cpf;
-  String endereco;
-  Aluno({this.nome, this.matricula, this.cpf, this.endereco});
+  Aluno({String nome, String matricula, String cpf, String endereco})
+      : super(nome: nome, matricula: matricula, cpf: cpf, endereco: endereco);
   Aluno.fromJson(Map<String, dynamic> json) {
     nome = json['nome'];
     matricula = json['matricula'];
     cpf = json['cpf'];
     endereco = json['endereco'];
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> aluno = new Map<String, dynamic>();
     aluno['nome'] = this.nome;
@@ -135,7 +135,7 @@ class _AlunosInfoState extends State<AlunosInfo> {
                             ]);
                           } else {
                             isAlertDialogIncorrectFields(
-                                context, 'Campo(s) inválido(s)!');
+                                context, 'Campo(s) inválido(s)!', Colors.red);
                           }
                         },
                         color: Colors.grey[700],

@@ -20,10 +20,18 @@ class _HomePageState extends State<HomePage> {
       selected_item = item;
     });
     if (selected_item.title == "Créditos") {
-      isAlertDialogIncorrectFields(context, "Feito por \nRodrigo Brochardt");
+      isAlertDialogIncorrectFields(
+          // caixa de dialogo com créditos
+          context,
+          "Feito por \nRodrigo Brochardt",
+          Colors.grey[700]);
     }
     if (selected_item.title == "Conta") {
-      isAlertDialogIncorrectFields(context, "Novidades em breve");
+      isAlertDialogIncorrectFields(
+          // caixa de dialogo
+          context,
+          "Novidades em breve",
+          Colors.grey[700]);
     }
   }
 
