@@ -12,6 +12,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  DropdownItem selected_item = choices[0]; // padrão
+  void _selectDropdownItem(DropdownItem item) {
+    // função para selecionar opção no botão dropdown no appbar
+
+    setState(() {
+      selected_item = item;
+    });
+    if (selected_item.title == "Créditos") {
+      isAlertDialogIncorrectFields(context, "Feito por \nRodrigo Brochardt");
+    }
+    if (selected_item.title == "Conta") {
+      isAlertDialogIncorrectFields(context, "Novidades em breve");
+    }
+  }
+
   void Back() async {
     //função pra buscar o valor dos clicks na segunda tela mandado pelo pop
     final value = await Navigator.push(
@@ -31,6 +46,20 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       drawer: menu_bar(context),
       appBar: AppBar(
+        actions: [
+          PopupMenuButton(
+            elevation: 3.2,
+            onSelected: _selectDropdownItem,
+            itemBuilder: (BuildContext context) {
+              return choices.map((DropdownItem choice) {
+                return PopupMenuItem<DropdownItem>(
+                  value: choice,
+                  child: Text(choice.title),
+                );
+              }).toList();
+            },
+          )
+        ],
         automaticallyImplyLeading: true,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,3 +98,15 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+class DropdownItem {
+  //propriedade dos items que irão ficar no botão dropDown
+  DropdownItem({this.title});
+  String title;
+}
+
+List<DropdownItem> choices = <DropdownItem>[
+  //itens criados
+  DropdownItem(title: 'Conta'),
+  DropdownItem(title: 'Créditos'),
+];
