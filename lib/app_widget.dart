@@ -1,6 +1,8 @@
 import 'package:add_to_app/alunos_info_page.dart';
 import 'package:add_to_app/alunos_list_page.dart';
 import 'package:add_to_app/personalData_page.dart';
+import 'package:add_to_app/professor_info_page.dart';
+import 'package:add_to_app/professor_list_page.dart';
 import 'package:add_to_app/register_page.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +31,8 @@ class DSIApp extends StatelessWidget {
         'PersonalData': (context) => PersonalDataPage(),
         'AlunosList': (context) => AlunosListPage(),
         'AlunosInfo': (context) => AlunosInfo(),
+        'ProfessoresList': (context) => ProfessoresListPage(),
+        'ProfessoresInfo': (context) => ProfessoresInfo(),
       },
     );
   }
@@ -102,7 +106,9 @@ Widget menu_bar(context) {
             leading: Icon(Icons.school),
             title: Text('Professores'),
             subtitle: Text("Informações"),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed("ProfessoresList");
+            },
           ),
           ListTile(
             leading: Icon(Icons.logout),

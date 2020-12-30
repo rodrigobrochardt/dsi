@@ -1,39 +1,40 @@
 import 'package:add_to_app/app_widget.dart';
 import 'package:flutter/material.dart';
 
-class Aluno {
-  //atributos  de aluno
+class Professor {
+  //atributos  de professor
   String nome;
   String matricula;
   String cpf;
   String endereco;
-  Aluno({this.nome, this.matricula, this.cpf, this.endereco});
-  Aluno.fromJson(Map<String, dynamic> json) {
+  Professor({this.nome, this.matricula, this.cpf, this.endereco});
+  Professor.fromJson(Map<String, dynamic> json) {
     nome = json['nome'];
     matricula = json['matricula'];
     cpf = json['cpf'];
     endereco = json['endereco'];
   }
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> aluno = new Map<String, dynamic>();
-    aluno['nome'] = this.nome;
-    aluno['matricula'] = this.matricula;
-    aluno['cpf'] = this.cpf;
-    aluno['endereco'] = this.endereco;
-    return aluno;
+    final Map<String, dynamic> prof = new Map<String, dynamic>();
+    prof['nome'] = this.nome;
+    prof['matricula'] = this.matricula;
+    prof['cpf'] = this.cpf;
+    prof['endereco'] = this.endereco;
+    return prof;
   }
 }
 
-class AlunosInfo extends StatefulWidget {
+class ProfessoresInfo extends StatefulWidget {
   String nome, cpf, endereco, matricula;
   String
-      titulo; //variavel para verificar se esta adicionando ou criando novo aluno para mudar titulo da tela
-  AlunosInfo({this.nome, this.cpf, this.endereco, this.matricula, this.titulo});
+      titulo; //variavel para verificar se esta adicionando ou criando novo professor para mudar titulo da tela
+  ProfessoresInfo(
+      {this.nome, this.cpf, this.endereco, this.matricula, this.titulo});
   @override
-  _AlunosInfoState createState() => _AlunosInfoState();
+  _ProfessoresInfo createState() => _ProfessoresInfo();
 }
 
-class _AlunosInfoState extends State<AlunosInfo> {
+class _ProfessoresInfo extends State<ProfessoresInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

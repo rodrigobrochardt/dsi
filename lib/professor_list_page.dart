@@ -1,102 +1,104 @@
 import 'dart:convert';
 
-import 'package:add_to_app/alunos_info_page.dart';
 import 'package:add_to_app/app_widget.dart';
+import 'package:add_to_app/professor_info_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
-class AlunosListPage extends StatefulWidget {
-  var alunos = new List<Aluno>(); //instancia o objeto aluno
+class ProfessoresListPage extends StatefulWidget {
+  var professores = new List<Professor>(); //instancia o objeto professor
 
-  AlunosListPage() {
-    alunos = [];
+  ProfessoresListPage() {
+    professores = [];
   }
 
   @override
-  _AlunosListPageState createState() => _AlunosListPageState();
+  _ProfessoresListPage createState() => _ProfessoresListPage();
 }
 
-class _AlunosListPageState extends State<AlunosListPage> {
-  _AlunosListPageState() {
-    loadAluno(); //chama a função quando iniciar a tela
+class _ProfessoresListPage extends State<ProfessoresListPage> {
+  _ProfessoresListPage() {
+    loadProfessor(); //chama a função quando iniciar a tela
   }
-  void addAluno() async {
+  void addProfessor() async {
     // função que sincroniza com a pagina de adicionar/editar e altera o objeto na lista
     final List result = await Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => AlunosInfo(
+          builder: (context) => ProfessoresInfo(
                 nome: "",
                 cpf: "",
                 endereco: "",
                 matricula: "",
-                titulo: "Adicionando Aluno",
+                titulo: "Adicionando Professor",
               )),
     );
     if (result != null) {
       setState(() {
-        widget.alunos.add(Aluno(
+        widget.professores.add(Professor(
             nome: result[0],
             cpf: result[1],
             endereco: result[2],
             matricula: result[3]));
-        saveAluno();
+        saveProfessor();
       });
     }
   }
 
-  void editAluno(int index) async {
+  void editProfessor(int index) async {
     // função que sincroniza com a pagina de adicionar/editar e altera o objeto na lista
     final List result = await Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => AlunosInfo(
-                nome: widget.alunos[index].nome,
-                cpf: widget.alunos[index].cpf,
-                endereco: widget.alunos[index].endereco,
-                matricula: widget.alunos[index].matricula,
-                titulo: "Editando Aluno",
+          builder: (context) => ProfessoresInfo(
+                nome: widget.professores[index].nome,
+                cpf: widget.professores[index].cpf,
+                endereco: widget.professores[index].endereco,
+                matricula: widget.professores[index].matricula,
+                titulo: "Editando Professor",
               )),
     );
     if (result != null) {
       setState(() {
         // atualiza a tela
-        widget.alunos[index].nome = result[0];
-        widget.alunos[index].cpf = result[1];
-        widget.alunos[index].endereco = result[2];
-        widget.alunos[index].matricula = result[3];
-        saveAluno(); //salva nas preferences
+        widget.professores[index].nome = result[0];
+        widget.professores[index].cpf = result[1];
+        widget.professores[index].endereco = result[2];
+        widget.professores[index].matricula = result[3];
+        saveProfessor(); //salva nas preferences
       });
     }
   }
 
-  void removeAluno(int index) {
+  void removeProfessor(int index) {
     //Remove o objeto da lista
     setState(() {
-      widget.alunos.removeAt(index);
-      saveAluno();
+      widget.professores.removeAt(index);
+      saveProfessor();
     });
   }
 
-  Future loadAluno() async {
+  Future loadProfessor() async {
     var prefs = await SharedPreferences.getInstance();
-    var data = prefs.getString('aluno');
+    var data = prefs.getString('prof');
     if (data != null) {
       Iterable decoded = jsonDecode(data); //pega as informações
-      List<Aluno> result = decoded
-          .map((x) => Aluno.fromJson(x))
-          .toList(); //mapeia no objeto aluno
+      List<Professor> result = decoded
+          .map((x) => Professor.fromJson(x))
+          .toList(); //mapeia no objeto professor
       setState(() {
-        widget.alunos = result; // atualiza no widget
+        widget.professores = result; // atualiza no widget
       });
     }
   }
 
-  void saveAluno() async {
+  void saveProfessor() async {
     var prefs = await SharedPreferences
         .getInstance(); //espera obter instancia do preferences
-    await prefs.setString('aluno',
-        jsonEncode(widget.alunos)); //seta os dados para json com chave aluno
+    await prefs.setString(
+        'prof',
+        jsonEncode(
+            widget.professores)); //seta os dados para json com chave prof
   }
 
   @override
@@ -104,34 +106,35 @@ class _AlunosListPageState extends State<AlunosListPage> {
     return Scaffold(
       drawer: menu_bar(context),
       appBar: AppBar(
-        title: Text('Lista de Alunos'),
+        title: Text('Lista de Professores'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          addAluno();
+          addProfessor();
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.grey[700],
       ),
       body: ListView.builder(
         //Gera automaticamente os items na tela
-        itemCount: widget.alunos.length,
+        itemCount: widget.professores.length,
         itemBuilder: (BuildContext ctxt, int index) {
-          final aluno = widget.alunos[index]; // busca o aluno na lista
+          final professor =
+              widget.professores[index]; // busca o professor na lista
           return Dismissible(
             onDismissed: (direction) {
-              removeAluno(index);
+              removeProfessor(index);
             },
             child: ListTile(
               //define como vai aparecer na tela os items
               leading: Icon(Icons.person),
-              title: Text(aluno.nome),
-              subtitle: Text("CPF: ${aluno.cpf}"),
+              title: Text(professor.nome),
+              subtitle: Text("CPF: ${professor.cpf}"),
               onTap: () {
-                editAluno(index);
+                editProfessor(index);
               },
             ),
-            key: Key(aluno.matricula),
+            key: Key(professor.matricula),
             background: Container(
               //fundo vermelho com icone de remover
               color: Colors.red[300],
