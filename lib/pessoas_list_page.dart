@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:add_to_app/app_widget.dart';
 import 'package:add_to_app/professor_info_page.dart';
-import 'package:add_to_app/professor_list_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'alunos_info_page.dart';
@@ -108,7 +107,7 @@ class _PessoasListPage extends State<PessoasListPage> {
         //Gera automaticamente os items na tela
         itemCount: widget.pessoas.length,
         itemBuilder: (BuildContext ctxt, int index) {
-          final pessoas = widget.pessoas[index]; // busca o professor na lista
+          final pessoas = widget.pessoas[index]; // busca as pessoas na lista
           return ListTile(
             //define como vai aparecer na tela os items
             leading: Icon(Icons.person),

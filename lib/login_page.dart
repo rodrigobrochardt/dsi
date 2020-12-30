@@ -1,8 +1,6 @@
-import 'package:add_to_app/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
-
 import 'app_widget.dart';
 
 class LoginPage extends StatefulWidget {

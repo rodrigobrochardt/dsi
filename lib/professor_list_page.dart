@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:add_to_app/app_widget.dart';
 import 'package:add_to_app/professor_info_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';

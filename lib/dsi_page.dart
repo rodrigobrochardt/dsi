@@ -1,7 +1,5 @@
 import 'dart:math';
-
 import 'dart:ui';
-import 'package:add_to_app/home_page.dart';
 import 'package:flutter/material.dart';
 
 class DSIPage extends StatefulWidget {
