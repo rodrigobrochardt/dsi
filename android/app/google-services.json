@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1023859026073",
+    "project_id": "crud-school-c1759",
+    "storage_bucket": "crud-school-c1759.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023859026073:android:bd72f651d071312733b008",
+        "android_client_info": {
+          "package_name": "com.example.add_to_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023859026073-afu1qe2allamvhlapo2qs8ojseo8on57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD90-OxAV7C3lzQwVbFzx9PVb3cSxyQ5Uw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023859026073-afu1qe2allamvhlapo2qs8ojseo8on57.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
