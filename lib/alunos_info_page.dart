@@ -123,11 +123,15 @@ class _AlunosInfoState extends State<AlunosInfo> {
                             // condição que precisa deixar os espaços preenchidos e senhas iguais
                             if (widget.titulo == "Adicionando Aluno") {
                               //condição para saber se esta adicionando
-                              Database().createNewAluno(widget.nome, widget.cpf,
-                                  widget.endereco, widget.matricula);
+                              Database().createNewPessoa(
+                                  "Aluno",
+                                  widget.nome,
+                                  widget.cpf,
+                                  widget.endereco,
+                                  widget.matricula);
                             } else {
                               //condição para saber se esta editando
-                              Database().updateAluno(
+                              Database().updatePessoa(
                                   widget.id,
                                   widget.nome,
                                   widget.cpf,

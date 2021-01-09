@@ -1,13 +1,6 @@
 import 'package:add_to_app/app_widget.dart';
-import 'package:add_to_app/pessoas_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:add_to_app/database.dart';
-
-class Professor {
-  String id, nome, matricula, endereco, cpf;
-  //atributos  de professor
-  Professor({this.id, this.nome, this.matricula, this.cpf, this.endereco});
-}
 
 class ProfessoresInfo extends StatefulWidget {
   String nome, cpf, endereco, matricula, id;
@@ -32,6 +25,7 @@ class _ProfessoresInfo extends State<ProfessoresInfo> {
           title: Text(widget.titulo),
         ),
         body: SingleChildScrollView(
+          //widget para evitar overflow na tela
           child: SizedBox(
             width: MediaQuery.of(context).size.width, //busca tamanho da tela
             height: MediaQuery.of(context).size.height, //busca tamanho da tela
@@ -119,13 +113,16 @@ class _ProfessoresInfo extends State<ProfessoresInfo> {
                               widget.matricula != '') {
                             // condição que precisa deixar os espaços preenchidos e senhas iguais
                             if (widget.titulo == "Adicionando Professor") {
-                              Database().createNewProfessor(
+                              Database().createNewPessoa(
+                                  //adicionar ao banco de dados
+                                  "Professor",
                                   widget.nome,
                                   widget.cpf,
                                   widget.endereco,
                                   widget.matricula);
                             } else {
-                              Database().updateProfessor(
+                              Database().updatePessoa(
+                                  //atualizar no banco de dados
                                   widget.id,
                                   widget.nome,
                                   widget.cpf,
@@ -133,7 +130,7 @@ class _ProfessoresInfo extends State<ProfessoresInfo> {
                                   widget.matricula);
                             }
 
-                            Navigator.pop(context);
+                            Navigator.pop(context); //voltar a tela anterior
                           } else {
                             isAlertDialogIncorrectFields(
                                 context, 'Campo(s) inválido(s)!', Colors.red);

@@ -1,4 +1,5 @@
 import 'package:add_to_app/app_widget.dart';
+import 'package:add_to_app/pessoas_list_page.dart';
 import 'package:add_to_app/professor_info_page.dart';
 import 'package:add_to_app/database.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class _ProfessoresListPage extends State<ProfessoresListPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
+            //ir a tela de adicionar professor
             context,
             MaterialPageRoute(
                 builder: (context) => ProfessoresInfo(
@@ -33,25 +35,26 @@ class _ProfessoresListPage extends State<ProfessoresListPage> {
         child: Icon(Icons.add),
         backgroundColor: Colors.grey[700],
       ),
-      body: StreamBuilder<List<Professor>>(
-          stream: Database().listProfessores(),
+      body: StreamBuilder<List<Pessoa>>(
+          //widget para comunicar com database
+          stream: Database().listPessoas("Professor"),
           builder: (
             context,
             snapshot,
           ) {
-            print(snapshot.data);
             if (!snapshot.hasData) {
-              return Loading();
+              return Loading(); //widget de loading
             }
 
-            List<Professor> professor = snapshot.data;
+            List<Pessoa> professor = snapshot.data; //obter dados do database
             return ListView.builder(
               //Gera automaticamente os items na tela
               itemCount: professor.length,
               itemBuilder: (BuildContext ctxt, int index) {
                 return Dismissible(
                   onDismissed: (direction) {
-                    Database().removeProfessor(professor[index].id);
+                    Database().removePessoa(
+                        professor[index].id); //remover info do database
                   },
                   child: ListTile(
                       //define como vai aparecer na tela os items
@@ -60,6 +63,7 @@ class _ProfessoresListPage extends State<ProfessoresListPage> {
                       subtitle: Text("CPF: ${professor[index].cpf}"),
                       onTap: () {
                         Navigator.push(
+                            //ir apra tela de edição de professor
                             context,
                             MaterialPageRoute(
                               builder: (context) => ProfessoresInfo(

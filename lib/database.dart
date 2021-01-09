@@ -1,22 +1,19 @@
-import 'package:add_to_app/professor_info_page.dart';
+import 'package:add_to_app/pessoas_list_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'alunos_info_page.dart';
-
 class Database {
-  CollectionReference professoresCollection = FirebaseFirestore.instance
-      .collection('professores'); //obter coleção professores
+  CollectionReference pessoasCollection =
+      FirebaseFirestore.instance.collection('pessoas'); //obter coleção alunos
 
-  CollectionReference alunosCollection =
-      FirebaseFirestore.instance.collection('alunos'); //obter coleção alunos
-
-  Future createNewProfessor(
+  Future createNewPessoa(
       //função para adicionar informação a coleção no data base
+      String func,
       String nome,
       String cpf,
       String endereco,
       String matricula) async {
-    return await professoresCollection.add({
+    return await pessoasCollection.add({
+      "função": func,
       "nome": nome,
       "cpf": cpf,
       "endereco": endereco,
@@ -24,19 +21,19 @@ class Database {
     });
   }
 
-  Future removeProfessor(id) async {
+  Future removePessoa(id) async {
     //função para remover no data base
-    await professoresCollection.doc(id).delete();
+    await pessoasCollection.doc(id).delete();
   }
 
-  Future updateProfessor(
+  Future updatePessoa(
       //função para atualizar informações no database
       id,
       String nome,
       String cpf,
       String endereco,
       String matricula) async {
-    await professoresCollection.doc(id).update({
+    await pessoasCollection.doc(id).update({
       "nome": nome,
       "cpf": cpf,
       "endereco": endereco,
@@ -44,11 +41,12 @@ class Database {
     });
   }
 
-  List<Professor> profFromFirestore(QuerySnapshot snapshot) {
+  List<Pessoa> pessoaFromFirestore(QuerySnapshot snapshot) {
     //mapeia as informações do database em um objeto
     if (snapshot != null) {
       return snapshot.docs.map((e) {
-        return Professor(
+        return Pessoa(
+          func: e.data()["função"],
           id: e.id,
           nome: e.data()["nome"],
           cpf: e.data()["cpf"],
@@ -61,64 +59,16 @@ class Database {
     }
   }
 
-  Stream<List<Professor>> listProfessores() {
+  Stream<List<Pessoa>> listPessoas(func) {
     //retorna uma lista de objeto professor
-    return professoresCollection.snapshots().map((profFromFirestore));
-  }
-
-  Future createNewAluno(
-      //função para adicionar informação a coleção no data base
-      String nome,
-      String cpf,
-      String endereco,
-      String matricula) async {
-    return await alunosCollection.add({
-      "nome": nome,
-      "cpf": cpf,
-      "endereco": endereco,
-      "matricula": matricula
-    });
-  }
-
-  Future removeAluno(id) async {
-    //função para remover no data base
-    await alunosCollection.doc(id).delete();
-  }
-
-  Future updateAluno(
-      //função para atualizar informações no database
-      id,
-      String nome,
-      String cpf,
-      String endereco,
-      String matricula) async {
-    await alunosCollection.doc(id).update({
-      "nome": nome,
-      "cpf": cpf,
-      "endereco": endereco,
-      "matricula": matricula
-    });
-  }
-
-  List<Aluno> alunoFromFirestore(QuerySnapshot snapshot) {
-    //mapeia as informações do database em um objeto
-    if (snapshot != null) {
-      return snapshot.docs.map((e) {
-        return Aluno(
-          id: e.id,
-          nome: e.data()["nome"],
-          cpf: e.data()["cpf"],
-          endereco: e.data()["endereco"],
-          matricula: e.data()["matricula"],
-        );
-      }).toList();
+    if (func != "") {
+      //verifica se esta listando por função especifica (aluno ou professor)
+      return pessoasCollection
+          .where("função", isEqualTo: func)
+          .snapshots()
+          .map(pessoaFromFirestore);
     } else {
-      return null;
+      return pessoasCollection.snapshots().map(pessoaFromFirestore);
     }
-  }
-
-  Stream<List<Aluno>> listAlunos() {
-    //retorna uma lista de objeto aluno
-    return alunosCollection.snapshots().map((alunoFromFirestore));
   }
 }

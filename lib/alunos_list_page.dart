@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:add_to_app/alunos_info_page.dart';
 import 'package:add_to_app/app_widget.dart';
+import 'package:add_to_app/pessoas_list_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -38,14 +39,14 @@ class _AlunosListPageState extends State<AlunosListPage> {
         child: Icon(Icons.add),
         backgroundColor: Colors.grey[700],
       ),
-      body: StreamBuilder<List<Aluno>>(
+      body: StreamBuilder<List<Pessoa>>(
           //widget que permite comunicar com data base
-          stream: Database().listAlunos(),
+          stream: Database().listPessoas("Aluno"),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Loading(); // widget de loading
             }
-            List<Aluno> aluno = snapshot.data; //lista com dados do aluno
+            List<Pessoa> aluno = snapshot.data; //lista com dados do aluno
 
             return ListView.builder(
               //Gera automaticamente os items na tela
@@ -53,7 +54,7 @@ class _AlunosListPageState extends State<AlunosListPage> {
               itemBuilder: (BuildContext ctxt, int index) {
                 return Dismissible(
                   onDismissed: (direction) {
-                    Database().removeAluno(aluno[index].id);
+                    Database().removePessoa(aluno[index].id);
                   },
                   child: ListTile(
                     //define como vai aparecer na tela os items
