@@ -1,14 +1,6 @@
 import 'package:add_to_app/app_widget.dart';
-import 'package:add_to_app/pessoas_list_page.dart';
 import 'package:flutter/material.dart';
-
 import 'database.dart';
-
-class Aluno {
-  String id, nome, matricula, endereco, cpf;
-  //atributos  de aluno
-  Aluno({this.id, this.nome, this.matricula, this.cpf, this.endereco});
-}
 
 class AlunosInfo extends StatefulWidget {
   String nome, cpf, endereco, matricula, id;
