@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'package:add_to_app/alunos_info_page.dart';
 import 'package:add_to_app/app_widget.dart';
 import 'package:add_to_app/pessoas_list_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 import 'database.dart';
