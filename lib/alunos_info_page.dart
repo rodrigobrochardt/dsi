@@ -2,32 +2,26 @@ import 'package:add_to_app/app_widget.dart';
 import 'package:add_to_app/pessoas_list_page.dart';
 import 'package:flutter/material.dart';
 
-class Aluno extends Pessoa {
-  //atributos  de aluno
-  Aluno({String nome, String matricula, String cpf, String endereco})
-      : super(nome: nome, matricula: matricula, cpf: cpf, endereco: endereco);
-  Aluno.fromJson(Map<String, dynamic> json) {
-    nome = json['nome'];
-    matricula = json['matricula'];
-    cpf = json['cpf'];
-    endereco = json['endereco'];
-  }
+import 'database.dart';
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> aluno = new Map<String, dynamic>();
-    aluno['nome'] = this.nome;
-    aluno['matricula'] = this.matricula;
-    aluno['cpf'] = this.cpf;
-    aluno['endereco'] = this.endereco;
-    return aluno;
-  }
+class Aluno {
+  String id, nome, matricula, endereco, cpf;
+  //atributos  de aluno
+  Aluno({this.id, this.nome, this.matricula, this.cpf, this.endereco});
 }
 
 class AlunosInfo extends StatefulWidget {
-  String nome, cpf, endereco, matricula;
+  String nome, cpf, endereco, matricula, id;
   String
       titulo; //variavel para verificar se esta adicionando ou criando novo aluno para mudar titulo da tela
-  AlunosInfo({this.nome, this.cpf, this.endereco, this.matricula, this.titulo});
+  AlunosInfo({
+    this.id,
+    this.nome,
+    this.cpf,
+    this.endereco,
+    this.matricula,
+    this.titulo,
+  });
   @override
   _AlunosInfoState createState() => _AlunosInfoState();
 }
@@ -120,18 +114,28 @@ class _AlunosInfoState extends State<AlunosInfo> {
                       width: double.infinity,
                       height: 40,
                       child: RaisedButton(
+                        //botão para salvar
                         onPressed: () {
                           if (widget.nome != '' &&
                               widget.cpf != '' &&
                               widget.endereco != '' &&
                               widget.matricula != '') {
                             // condição que precisa deixar os espaços preenchidos e senhas iguais
-                            Navigator.pop(context, [
-                              widget.nome,
-                              widget.cpf,
-                              widget.endereco,
-                              widget.matricula
-                            ]);
+                            if (widget.titulo == "Adicionando Aluno") {
+                              //condição para saber se esta adicionando
+                              Database().createNewAluno(widget.nome, widget.cpf,
+                                  widget.endereco, widget.matricula);
+                            } else {
+                              //condição para saber se esta editando
+                              Database().updateAluno(
+                                  widget.id,
+                                  widget.nome,
+                                  widget.cpf,
+                                  widget.endereco,
+                                  widget.matricula);
+                            }
+
+                            Navigator.pop(context); //voltar para tela anterior
                           } else {
                             isAlertDialogIncorrectFields(
                                 context, 'Campo(s) inválido(s)!', Colors.red);
