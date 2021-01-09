@@ -1,33 +1,25 @@
 import 'package:add_to_app/app_widget.dart';
 import 'package:add_to_app/pessoas_list_page.dart';
 import 'package:flutter/material.dart';
+import 'package:add_to_app/database.dart';
 
-class Professor extends Pessoa {
+class Professor {
+  String id, nome, matricula, endereco, cpf;
   //atributos  de professor
-  Professor({String nome, String matricula, String cpf, String endereco})
-      : super(nome: nome, matricula: matricula, cpf: cpf, endereco: endereco);
-  Professor.fromJson(Map<String, dynamic> json) {
-    nome = json['nome'];
-    matricula = json['matricula'];
-    cpf = json['cpf'];
-    endereco = json['endereco'];
-  }
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> prof = new Map<String, dynamic>();
-    prof['nome'] = this.nome;
-    prof['matricula'] = this.matricula;
-    prof['cpf'] = this.cpf;
-    prof['endereco'] = this.endereco;
-    return prof;
-  }
+  Professor({this.id, this.nome, this.matricula, this.cpf, this.endereco});
 }
 
 class ProfessoresInfo extends StatefulWidget {
-  String nome, cpf, endereco, matricula;
+  String nome, cpf, endereco, matricula, id;
   String
       titulo; //variavel para verificar se esta adicionando ou criando novo professor para mudar titulo da tela
   ProfessoresInfo(
-      {this.nome, this.cpf, this.endereco, this.matricula, this.titulo});
+      {this.id,
+      this.nome,
+      this.cpf,
+      this.endereco,
+      this.matricula,
+      this.titulo});
   @override
   _ProfessoresInfo createState() => _ProfessoresInfo();
 }
@@ -126,12 +118,22 @@ class _ProfessoresInfo extends State<ProfessoresInfo> {
                               widget.endereco != '' &&
                               widget.matricula != '') {
                             // condição que precisa deixar os espaços preenchidos e senhas iguais
-                            Navigator.pop(context, [
-                              widget.nome,
-                              widget.cpf,
-                              widget.endereco,
-                              widget.matricula
-                            ]);
+                            if (widget.titulo == "Adicionando Professor") {
+                              Database().createNewProfessor(
+                                  widget.nome,
+                                  widget.cpf,
+                                  widget.endereco,
+                                  widget.matricula);
+                            } else {
+                              Database().updateProfessor(
+                                  widget.id,
+                                  widget.nome,
+                                  widget.cpf,
+                                  widget.endereco,
+                                  widget.matricula);
+                            }
+
+                            Navigator.pop(context);
                           } else {
                             isAlertDialogIncorrectFields(
                                 context, 'Campo(s) inválido(s)!', Colors.red);

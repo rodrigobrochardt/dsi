@@ -5,6 +5,7 @@ import 'package:add_to_app/pessoas_list_page.dart';
 import 'package:add_to_app/professor_info_page.dart';
 import 'package:add_to_app/professor_list_page.dart';
 import 'package:add_to_app/register_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'forgot_page.dart';
 import 'dsi_page.dart';
@@ -14,28 +15,51 @@ import 'login_page.dart';
 class DSIApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Add to App',
-      theme: ThemeData(
-        primaryColor: Colors.grey[700],
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      initialRoute: 'Login',
-      routes: {
-        //tags para trocar de tela
-        'Forgot': (context) => ForgotPage(),
-        'Home': (context) => HomePage(),
-        'DSI': (context) => DSIPage(),
-        'Login': (context) => LoginPage(),
-        'Register': (context) => RegisterPage(),
-        'PersonalData': (context) => PersonalDataPage(),
-        'AlunosList': (context) => AlunosListPage(),
-        'AlunosInfo': (context) => AlunosInfo(),
-        'ProfessoresList': (context) => ProfessoresListPage(),
-        'ProfessoresInfo': (context) => ProfessoresInfo(),
-        'PessoasList': (context) => PessoasListPage(),
-      },
-    );
+    return FutureBuilder<Object>(
+        future: Firebase.initializeApp(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Scaffold(
+              body: Center(
+                child: Text(snapshot.error.toString()),
+              ),
+            );
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Loading();
+          }
+
+          return MaterialApp(
+            title: 'Add to App',
+            theme: ThemeData(
+              primaryColor: Colors.grey[700],
+              visualDensity: VisualDensity.adaptivePlatformDensity,
+            ),
+            initialRoute: 'Login',
+            routes: {
+              //tags para trocar de tela
+              'Forgot': (context) => ForgotPage(),
+              'Home': (context) => HomePage(),
+              'DSI': (context) => DSIPage(),
+              'Login': (context) => LoginPage(),
+              'Register': (context) => RegisterPage(),
+              'PersonalData': (context) => PersonalDataPage(),
+              'AlunosList': (context) => AlunosListPage(),
+              'AlunosInfo': (context) => AlunosInfo(),
+              'ProfessoresList': (context) => ProfessoresListPage(),
+              'ProfessoresInfo': (context) => ProfessoresInfo(),
+              'PessoasList': (context) => PessoasListPage(),
+            },
+          );
+        });
+  }
+}
+
+class Loading extends StatelessWidget {
+  //widget de carregando dados
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }
 
@@ -80,8 +104,8 @@ Widget menu_bar(context) {
       child: Column(
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text("user"),
-            accountEmail: Text("user@user.com"),
+            accountName: Text("MENU"),
+            accountEmail: Text("selecione a opção desejada"),
           ),
           ListTile(
             leading: Icon(Icons.home),
