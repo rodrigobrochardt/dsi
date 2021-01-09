@@ -11,7 +11,11 @@ class Database {
       FirebaseFirestore.instance.collection('alunos'); //obter coleção alunos
 
   Future createNewProfessor(
-      String nome, String cpf, String endereco, String matricula) async {
+      //função para adicionar informação a coleção no data base
+      String nome,
+      String cpf,
+      String endereco,
+      String matricula) async {
     return await professoresCollection.add({
       "nome": nome,
       "cpf": cpf,
@@ -21,11 +25,17 @@ class Database {
   }
 
   Future removeProfessor(id) async {
+    //função para remover no data base
     await professoresCollection.doc(id).delete();
   }
 
   Future updateProfessor(
-      id, String nome, String cpf, String endereco, String matricula) async {
+      //função para atualizar informações no database
+      id,
+      String nome,
+      String cpf,
+      String endereco,
+      String matricula) async {
     await professoresCollection.doc(id).update({
       "nome": nome,
       "cpf": cpf,
@@ -35,6 +45,7 @@ class Database {
   }
 
   List<Professor> profFromFirestore(QuerySnapshot snapshot) {
+    //mapeia as informações do database em um objeto
     if (snapshot != null) {
       return snapshot.docs.map((e) {
         return Professor(
@@ -51,11 +62,16 @@ class Database {
   }
 
   Stream<List<Professor>> listProfessores() {
+    //retorna uma lista de objeto professor
     return professoresCollection.snapshots().map((profFromFirestore));
   }
 
   Future createNewAluno(
-      String nome, String cpf, String endereco, String matricula) async {
+      //função para adicionar informação a coleção no data base
+      String nome,
+      String cpf,
+      String endereco,
+      String matricula) async {
     return await alunosCollection.add({
       "nome": nome,
       "cpf": cpf,
@@ -65,11 +81,17 @@ class Database {
   }
 
   Future removeAluno(id) async {
+    //função para remover no data base
     await alunosCollection.doc(id).delete();
   }
 
   Future updateAluno(
-      id, String nome, String cpf, String endereco, String matricula) async {
+      //função para atualizar informações no database
+      id,
+      String nome,
+      String cpf,
+      String endereco,
+      String matricula) async {
     await alunosCollection.doc(id).update({
       "nome": nome,
       "cpf": cpf,
@@ -79,6 +101,7 @@ class Database {
   }
 
   List<Aluno> alunoFromFirestore(QuerySnapshot snapshot) {
+    //mapeia as informações do database em um objeto
     if (snapshot != null) {
       return snapshot.docs.map((e) {
         return Aluno(
@@ -95,6 +118,7 @@ class Database {
   }
 
   Stream<List<Aluno>> listAlunos() {
+    //retorna uma lista de objeto aluno
     return alunosCollection.snapshots().map((alunoFromFirestore));
   }
 }
